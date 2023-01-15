@@ -2,7 +2,9 @@
 
 #include <cstdint>
 
-#define KSP_BIT(x) (0x1 << x)
+#define KSP_BIT(x)              (0x1 << x)
+#define KSP_MAGIC               0xA455
+#define KSP_MAX_PAYLOAD_SIZE    38
 
 namespace kronos {
 
@@ -15,6 +17,7 @@ namespace kronos {
     };
 
     struct PacketHeader {
+        uint16_t Magic;
         uint32_t PacketId;
         uint8_t PacketFlags;
         uint16_t CommandId;
@@ -24,7 +27,7 @@ namespace kronos {
 
     struct Packet {
         PacketHeader Header;
-        uint8_t Payload[40];
+        uint8_t Payload[KSP_MAX_PAYLOAD_SIZE];
     } __attribute__((packed));
 
 }

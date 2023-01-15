@@ -7,6 +7,7 @@ namespace kronos {
     void EncodePacket(Packet* dest, uint8_t flags, uint16_t command, const uint8_t* payload, uint32_t payloadSize) {
         *dest = {
             .Header = {
+                .Magic = KSP_MAGIC,
                 .PacketId = s_NextPacketId++,
                 .PacketFlags = flags,
                 .CommandId = command,
@@ -16,24 +17,25 @@ namespace kronos {
             .Payload = {}
         };
         memcpy(dest->Payload, payload, payloadSize);
-        dest->Header.CheckSum = CRC32((uint8_t*)&dest, sizeof(dest->Header) + dest->Header.PayloadSize);
+        dest->Header.CheckSum = CRC32((uint8_t*) &dest, sizeof(dest->Header) + dest->Header.PayloadSize);
     }
 
-    int32_t DecodePacket(Packet* dest, const uint8_t* buffer, uint32_t size) {
-        *dest = {};
-        memcpy(&dest->Header, buffer, std::min<uint32_t>(sizeof(dest->Header), size));
-        memcpy(&dest->Payload, buffer + sizeof(dest->Header), std::min<uint32_t>(size - sizeof(dest->Header), dest->Header.PayloadSize));
-        uint32_t packetSize = std::min<uint32_t>(sizeof(dest->Header) + dest->Header.PayloadSize, size);
-
-        uint32_t crc = dest->Header.CheckSum;
-        dest->Header.CheckSum = 0;
-
-        uint32_t packetCrc = CRC32(buffer, packetSize);
-        dest->Header.CheckSum = crc;
-        if (packetCrc != crc)
+    int32_t ValidatePacketHeader(PacketHeader* header) {
+        if (header->Magic != KSP_MAGIC)
             return -1;
+        return (int32_t) header->PayloadSize;
+    }
 
-        return (int32_t)packetSize;
+    bool ValidatePacket(Packet* packet) {
+        uint32_t crc = packet->Header.CheckSum;
+        packet->Header.CheckSum = 0;
+
+        uint32_t packetCrc = CRC32((uint8_t*) packet, sizeof(packet->Header) + packet->Header.PayloadSize);
+        packet->Header.CheckSum = crc;
+        if (packetCrc != crc)
+            return false;
+
+        return true;
     }
 
 }

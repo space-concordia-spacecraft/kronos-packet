@@ -70,10 +70,9 @@ namespace kronos {
             0xbcb4666d, 0xb8757bda, 0xb5365d03, 0xb1f740b4
         };
 
-    unsigned int CRC32(const unsigned char *buf, unsigned int len, unsigned int init) {
+    unsigned int CRC32(const unsigned char* buf, unsigned int len, unsigned int init) {
         unsigned int crc = init;
-        while (len--)
-        {
+        while (len--) {
             crc = (crc << 8) ^ s_CRC32Table[((crc >> 24) ^ *buf) & 255];
             buf++;
         }
