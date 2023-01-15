@@ -6,7 +6,9 @@
 #include <cstddef>
 #include <algorithm>
 
-extern void *memcpy(void *dest, const void * src, size_t n);
+extern "C" {
+    void *memcpy(void *dest, const void * src, size_t n);
+}
 
 namespace kronos {
 
