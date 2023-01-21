@@ -10,9 +10,10 @@ namespace kronos {
 
     namespace PacketFlags {
         enum T : uint8_t {
-            None = 0,
-            More = KSP_BIT(0),
-            Scheduled = KSP_BIT(1)
+            none = 0,
+            eof = KSP_BIT(0),
+            sched = KSP_BIT(1),
+            ack = KSP_BIT(2)
         };
     };
 
