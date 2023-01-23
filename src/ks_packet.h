@@ -4,7 +4,7 @@
 
 #define KSP_BIT(x)              (0x1 << x)
 #define KSP_MAGIC               0xA455
-#define KSP_MAX_PAYLOAD_SIZE    38
+#define KSP_MAX_PAYLOAD_SIZE    41
 
 namespace kronos {
 
@@ -23,7 +23,7 @@ namespace kronos {
         uint8_t PacketFlags;
         uint16_t CommandId;
         uint32_t CheckSum;
-        uint32_t PayloadSize;
+        uint8_t PayloadSize;
     } __attribute__((packed));
 
     struct Packet {
