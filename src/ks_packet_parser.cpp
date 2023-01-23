@@ -23,6 +23,8 @@ namespace kronos {
     int32_t ValidatePacketHeader(const PacketHeader& header) {
         if (header.Magic != KSP_MAGIC)
             return -1;
+        if (header.PayloadSize > KSP_MAX_PAYLOAD_SIZE)
+            return -1;
         return (int32_t) header.PayloadSize;
     }
 
