@@ -17,7 +17,30 @@ namespace kronos {
             .Payload = {}
         };
         memcpy(dest.Payload, payload, payloadSize);
-        dest.Header.CheckSum = CRC32((uint8_t*) &dest, sizeof(dest.Header) + dest.Header.PayloadSize);
+        dest.Header.CheckSum = CRC32((uint8_t*)&dest, sizeof(dest.Header) + dest.Header.PayloadSize);
+    }
+
+    void EncodePacket(
+        Packet& dest,
+        uint32_t packetId,
+        uint8_t flags,
+        uint16_t command,
+        const uint8_t* payload,
+        uint8_t payloadSize
+    ) {
+        dest = {
+            .Header = {
+                .Magic = KSP_MAGIC,
+                .PacketId = packetId,
+                .PacketFlags = flags,
+                .CommandId = command,
+                .CheckSum = 0,
+                .PayloadSize = payloadSize
+            },
+            .Payload = {}
+        };
+        memcpy(dest.Payload, payload, payloadSize);
+        dest.Header.CheckSum = CRC32((uint8_t*)&dest, sizeof(dest.Header) + dest.Header.PayloadSize);
     }
 
     int32_t ValidatePacketHeader(const PacketHeader& header) {
@@ -25,14 +48,14 @@ namespace kronos {
             return -1;
         if (header.PayloadSize > KSP_MAX_PAYLOAD_SIZE)
             return -1;
-        return (int32_t) header.PayloadSize;
+        return (int32_t)header.PayloadSize;
     }
 
     bool ValidatePacket(Packet& packet) {
         uint32_t crc = packet.Header.CheckSum;
         packet.Header.CheckSum = 0;
 
-        uint32_t packetCrc = CRC32((uint8_t*) &packet, sizeof(packet.Header) + packet.Header.PayloadSize);
+        uint32_t packetCrc = CRC32((uint8_t*)&packet, sizeof(packet.Header) + packet.Header.PayloadSize);
         packet.Header.CheckSum = crc;
         if (packetCrc != crc)
             return false;
