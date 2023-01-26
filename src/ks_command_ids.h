@@ -8,3 +8,4 @@
 #define KS_CMD_DOWNLINK_FETCH       5 // From groundstation, request specific parts of a file/buffer
 #define KS_CMD_DOWNLINK_CONTINUE    6 // From groundstation, after you've received successfully x packets
 #define KS_CMD_LIST_FILES           7
+#define KS_CMD_LIST_FILES_RES       8
