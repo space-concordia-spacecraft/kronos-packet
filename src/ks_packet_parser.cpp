@@ -87,4 +87,8 @@ namespace kronos {
         return true;
     }
 
+    int32_t GetPacketSize(Packet& packet) {
+        return (int32_t)(packet.Header.PayloadSize + sizeof(packet.Header));
+    }
+
 }
