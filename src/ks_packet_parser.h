@@ -19,6 +19,6 @@ namespace kronos {
     int32_t ValidatePacketHeader(const PacketHeader& header);
     bool ValidatePacket(Packet& packet);
 
-    int32_t GetPacketSize(Packet& packet);
-
+    inline size_t GetPacketSize(const Packet& packet);
+    inline size_t GetPayloadSizePart(const Packet& packet);
 }
