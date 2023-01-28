@@ -2,10 +2,13 @@
 
 #include <cstdint>
 
-#define KSP_BIT(x)              (0x1 << x)
-#define KSP_MAGIC               0xA455
-#define KSP_MAGIC_BYTES         (char)(KSP_MAGIC & 0xFF), (char)((KSP_MAGIC >> 8) & 0xFF)
-#define KSP_MAX_PAYLOAD_SIZE    41
+typedef uint8_t KspPacketNumType;
+
+#define KSP_BIT(x)                  (0x1 << x)
+#define KSP_MAGIC                   0xA455
+#define KSP_MAGIC_BYTES             (char)(KSP_MAGIC & 0xFF), (char)((KSP_MAGIC >> 8) & 0xFF)
+#define KSP_MAX_PAYLOAD_SIZE        41
+#define KSP_MAX_PAYLOAD_SIZE_MANY   (KSP_MAX_PAYLOAD_SIZE - sizeof(KspPacketNumType))
 
 namespace kronos {
 
