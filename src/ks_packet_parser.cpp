@@ -47,7 +47,7 @@ namespace kronos {
         Packet& dest,
         uint8_t flags,
         uint16_t command,
-        uint16_t part,
+        KspPacketIdxType part,
         const uint8_t* payload,
         uint8_t payloadSize
     ) {
