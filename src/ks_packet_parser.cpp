@@ -86,13 +86,4 @@ namespace kronos {
 
         return true;
     }
-
-    inline size_t GetPacketSize(const Packet& packet) {
-        return packet.Header.PayloadSize + sizeof(packet.Header);
-    }
-
-    inline size_t GetPayloadSizePart(const Packet& packet) {
-        return packet.Header.PayloadSize - sizeof(KspPacketIdxType);
-    }
-
 }
