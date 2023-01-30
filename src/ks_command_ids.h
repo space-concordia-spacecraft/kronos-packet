@@ -1,11 +1,19 @@
 #pragma once
 
-#define KS_CMD_PING                 0
-#define KS_CMD_TLE                  1
-#define KS_CMD_ECHO                 2
-#define KS_CMD_DOWNLINK_BEGIN       3
-#define KS_CMD_DOWNLINK_PART        4 // From satellite, sending part of a file/buffer
-#define KS_CMD_DOWNLINK_FETCH       5 // From groundstation, request specific parts of a file/buffer
-#define KS_CMD_DOWNLINK_CONTINUE    6 // From groundstation, after you've received successfully x packets
-#define KS_CMD_LIST_FILES           7
-#define KS_CMD_LIST_FILES_RES       8
+enum class KsCommands : uint16_t {
+    // GROUNDSTATION COMMANDS
+    KS_CMD_PING,
+    KS_CMD_TLE,
+    KS_CMD_ECHO,
+    KS_CMD_DOWNLINK_BEGIN,
+    KS_CMD_DOWNLINK_FETCH,
+    KS_CMD_DOWNLINK_CONTINUE,
+    KS_CMD_LIST_FILES,
+
+    // SATELLITE COMMANDS
+    KS_CMD_RES_FILEINFO,
+    KS_CMD_RES_FILES,
+    KS_CMD_RES_FILEPART,
+
+    KS_CMD_END__,
+};
