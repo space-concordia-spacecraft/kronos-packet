@@ -2,7 +2,6 @@
 
 #include "ks_crc.h"
 #include "ks_packet.h"
-#include "ks_command_ids.h"
 
 #include <cstddef>
 #include <algorithm>

@@ -4,7 +4,7 @@ namespace kronos {
 
     static uint32_t s_NextPacketId = 0;
 
-    void EncodePacket(Packet& dest, uint8_t flags, KsCommand command, const uint8_t* payload, uint8_t payloadSize) {
+    void EncodePacket(Packet& dest, uint8_t flags, uint16_t command, const uint8_t* payload, uint8_t payloadSize) {
         dest = {
             .Header = {
                 .Magic = KSP_MAGIC,
@@ -24,7 +24,7 @@ namespace kronos {
         Packet& dest,
         uint32_t packetId,
         uint8_t flags,
-        KsCommand command,
+        uint16_t command,
         const uint8_t* payload,
         uint8_t payloadSize
     ) {
@@ -46,7 +46,7 @@ namespace kronos {
     void EncodePacketPart(
         Packet& dest,
         uint8_t flags,
-        KsCommand command,
+        uint16_t command,
         KspPacketIdxType part,
         const uint8_t* payload,
         uint8_t payloadSize
