@@ -17,7 +17,8 @@ namespace kronos {
             none = 0,
             eof = KSP_BIT(0),
             sched = KSP_BIT(1),
-            ack = KSP_BIT(2)
+            ack = KSP_BIT(2),
+            err = KSP_BIT(3)
         };
     };
 
