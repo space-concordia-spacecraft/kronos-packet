@@ -1,6 +1,6 @@
 #pragma once
 
-enum class KsCommands : uint16_t {
+enum KsCommand : uint16_t {
     // GROUNDSTATION COMMANDS
     KS_CMD_PING,
     KS_CMD_TLE,
