@@ -11,6 +11,7 @@ enum KsCommand : uint16_t {
     KS_CMD_LIST_FILES,
 
     // SATELLITE COMMANDS
+    KS_CMD_RES_ECHO,
     KS_CMD_RES_FILEINFO,
     KS_CMD_RES_FILES,
     KS_CMD_RES_FILEPART,
