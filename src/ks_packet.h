@@ -9,6 +9,7 @@ typedef uint8_t KspPacketIdxType;
 #define KSP_MAGIC_BYTES             (char)(KSP_MAGIC & 0xFF), (char)((KSP_MAGIC >> 8) & 0xFF)
 #define KSP_MAX_PAYLOAD_SIZE        41
 #define KSP_MAX_PAYLOAD_SIZE_PART   (KSP_MAX_PAYLOAD_SIZE - sizeof(KspPacketIdxType))
+#define KSP_MAX_PACKET_PART_RATE    10
 
 namespace kronos {
 
